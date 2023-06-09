@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+import '../auth.dart';
 import '../components/categorytiles.dart';
 import 'cart_page.dart';
 import 'chat_page.dart';
@@ -18,6 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AuthProvider _authProvider = AuthProvider();
+
   int _selectedIndex = 0;
   final List<Color> _bgColors = [
     HexColor("#15CE1F"),
@@ -85,18 +88,28 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 37.0),
-                  child: Text(
-                    "Hi!",
-                    style: TextStyle(fontSize: 32.0,
-                    // if theme is dark then text color is white else black
-                      color: TextColor,
-                      // color: Theme.of(context).colorScheme.onBackground,
-                    
-                    //  ,
+                    padding: const EdgeInsets.symmetric(horizontal: 37.0),
+                    child: FutureBuilder<String?>(
+                      future: _authProvider.getUsername(),
+                      builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return CircularProgressIndicator(); // Show a loading indicator while retrieving the username
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          final username = snapshot.data ?? ''; // Retrieve the username from the snapshot
+                          return Text(
+                            'Hi, $username!',
+                            style: TextStyle(
+                              fontSize: 32.0,
+                              color: TextColor,
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
-                ),
+
                 const SizedBox(
                   height: 4.0,
                 ),
