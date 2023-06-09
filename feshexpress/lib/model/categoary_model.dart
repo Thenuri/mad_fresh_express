@@ -17,3 +17,4 @@ class CategoaryModel extends ChangeNotifier {
   get catogaries => _catogaries;
    
 }
+

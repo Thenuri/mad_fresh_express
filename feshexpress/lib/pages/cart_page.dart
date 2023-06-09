@@ -33,34 +33,138 @@ class _cartPageState extends State<cartPage> {
   ];
   @override
   Widget build(BuildContext context) {
+     Color TextColor = Theme.of(context).brightness == Brightness.dark ? Colors.white : HexColor("#575353");
+    Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#3B3B3B") : Colors.white;
+    Color topic = Theme.of(context).brightness == Brightness.dark ? HexColor("#0EC42B") : HexColor("#575353");
+
     return Scaffold(
       body: Column(
         children: [
           Padding(
             padding:EdgeInsets.only(left:25.0,right:20.0,top:93.0),
-            child: Text('My Cart',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color:HexColor("#4D4B4B"))),
+            child: Text('My Cart',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color:topic)),
           ), 
-          Expanded(
-              child: Consumer<cartModel>(
-                builder: (context, value, child) {
-                  return GridView.builder(
-                    itemCount: value.cart.length,
-                    padding: EdgeInsets.all(20.0),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: 250/99,
-                    ),
-                    itemBuilder: (context, index) {
-                    return cartTiles(
-                      image: value.cart[index][0],
-                      title: value.cart[index][1],
-                      price: value.cart[index][2],
-                    );
-                  },
-                );
-              },
+Padding(
+  padding: const EdgeInsets.only(top: 40.0),
+  child: Stack(
+    children: [
+      Container(
+        width: 300,
+        height: 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: HexColor("#848484"),
+            width: 2,
+          ),
+        ),
+        child: Row(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Image.asset(
+                'lib/images/mango.png',
+                width: 120.0,
+                height: 99.0,
+              ),
             ),
-          ), 
+            
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Mango - 100g',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 4.0),
+                  Text(
+                    'Rs 250 per 100g',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      color: HexColor("#848484"),
+                    ),
+                  ),
+                 
+                  Text(
+                    'Rs 500',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(right:30.0,top: 25.0),
+              child: Container(
+                height: 70.0,
+                decoration: BoxDecoration(
+                  
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                    color: HexColor("#848484"),
+                    width: 2,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        // Add your logic for the plus button here
+                      },
+                      child: Icon(
+                        Icons.add,
+                        size: 20.0,
+                      ),
+                    ),
+                    Text(
+                      '0',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        // Add your logic for the minus button here
+                      },
+                      child: Icon(
+                        Icons.remove,
+                        size: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Positioned(
+        top: 1.0,
+        right: 0.75,
+        child: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            // Add your logic for the close button here
+          },
+        ),
+      ),
+    ],
+  ),
+),
+
+
+
+            SizedBox(height: 100.0,),
           Column(
             children: [
               // ...existing code...
@@ -69,7 +173,7 @@ class _cartPageState extends State<cartPage> {
                 child: Container(
                   height:2.0, // Specify the desired height of the divider
                   child: const Divider(
-                    color: Colors.black, // Set the color of the divider
+                     // Set the color of the divider
                   ),
                 ),
               ),
@@ -84,7 +188,7 @@ class _cartPageState extends State<cartPage> {
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        color: HexColor("#000000"),
+                       
                       ),
                     ),
                     Row(
@@ -93,7 +197,7 @@ class _cartPageState extends State<cartPage> {
                           'Rs ',
                           style: TextStyle(
                             fontSize: 16.0,
-                            color: HexColor("#000000"),
+                            
                           ),
                         ),
                         Text(
@@ -101,7 +205,7 @@ class _cartPageState extends State<cartPage> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            color: HexColor("#000000"),
+                            
                           ),
                         ),
                       ],
@@ -120,7 +224,7 @@ class _cartPageState extends State<cartPage> {
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        color: HexColor("#000000"),
+                       
                       ),
                     ),
                     Row(
@@ -131,7 +235,7 @@ class _cartPageState extends State<cartPage> {
                             'Rs ',
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: HexColor("#000000"),
+                             
                             ),
                           ),
                         ),
@@ -140,7 +244,7 @@ class _cartPageState extends State<cartPage> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            color: HexColor("#000000"),
+                            
                           ),
                         ),
                       ],
@@ -159,7 +263,7 @@ class _cartPageState extends State<cartPage> {
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        color: HexColor("#000000"),
+                       
                       ),
                     ),
                     Row(
@@ -168,7 +272,7 @@ class _cartPageState extends State<cartPage> {
                           'Rs ',
                           style: TextStyle(
                             fontSize: 16.0,
-                            color: HexColor("#000000"),
+                            
                           ),
                         ),
                         Text(
@@ -176,7 +280,7 @@ class _cartPageState extends State<cartPage> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            color: HexColor("#000000"),
+                            
                           ),
                         ),
                       ],
@@ -213,6 +317,7 @@ class _cartPageState extends State<cartPage> {
                           fontSize: 17.0,
                           fontFamily: 'Roboto',
                           color: HexColor("#FFFFFF"),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     SizedBox(width:120.0), // Add a space of 5.0 between the text and the icon
@@ -229,7 +334,7 @@ class _cartPageState extends State<cartPage> {
         ],
       ),
        bottomNavigationBar: Container(
-        color: Colors.white,
+        color: navbar,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
           child: GNav(
@@ -237,7 +342,7 @@ class _cartPageState extends State<cartPage> {
             iconSize: 30.0,
             gap: 8.0,
             textSize: 18.0,
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.white,
             tabBackgroundColor: _bgColors[_selectedIndex],
             activeColor: Colors.white,
             padding: EdgeInsets.all(16.0),

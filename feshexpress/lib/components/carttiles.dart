@@ -36,11 +36,14 @@ class _cartTilesState extends State<cartTiles> {
   }
   @override
   Widget build(BuildContext context) {
+     Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#3B3B3B") : Colors.white;
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
+        // color: Colors.white,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
+          color: navbar,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: HexColor("#848484"), // Set the border color here

@@ -1,0 +1,32 @@
+[
+  {
+    "image": "lib/images/tomato.png",
+    "title": "Tomato",
+    "price": "250"
+  },
+  {
+    "image": "lib/images/onion.png",
+    "title": "Onion",
+    "price": "250"
+  },
+  {
+    "image": "lib/images/pum.png",
+    "title": "Pumking",
+    "price": "250"
+  },
+  {
+    "image": "lib/images/carrot.png",
+    "title": "Carrot",
+    "price": "250"
+  },
+  {
+    "image": "lib/images/pum.png",
+    "title": "Pumking",
+    "price": "250"
+  },
+  {
+    "image": "lib/images/carrot.png",
+    "title": "Carrot",
+    "price": "250"
+  }
+]

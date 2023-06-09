@@ -54,6 +54,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Color TextColor = Theme.of(context).brightness == Brightness.dark ? Colors.white : HexColor("#575353");
+    Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#3B3B3B") : Colors.white;
     return Scaffold(
       body: Stack(
         children: [
@@ -61,7 +63,10 @@ class _HomePageState extends State<HomePage> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(xOffset == 0 && yOffset == 0 ? 0 : 20),
-              color: Colors.white,
+              // theme bg color
+              color: Theme.of(context).colorScheme.background,
+
+              // color: Colors.whit,
             ),
             transform: Matrix4.translationValues(xOffset, yOffset, 0)..scale(scaleFactor),
             child: Column(
@@ -73,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   child: IconButton(
                     icon: Icon(
                       Icons.menu,
-                      color: Colors.black,
+                      color: TextColor,
                     ),
                     iconSize: 35.0,
                     onPressed: toggleMenu,
@@ -83,7 +88,13 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 37.0),
                   child: Text(
                     "Hi!",
-                    style: TextStyle(fontSize: 32.0, color: HexColor("#575353")),
+                    style: TextStyle(fontSize: 32.0,
+                    // if theme is dark then text color is white else black
+                      color: TextColor,
+                      // color: Theme.of(context).colorScheme.onBackground,
+                    
+                    //  ,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -93,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 37.0),
                   child: Text(
                     "Get fresh and good items delivered to your doorstep",
-                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: HexColor("#575353")),
+                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color:TextColor,),
                   ),
                 ),
                 const SizedBox(
@@ -103,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 37.0),
                   child: Text(
                     "Categories",
-                    style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: HexColor("#575353")),
+                    style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color:TextColor,),
                   ),
                 ),
                 const SizedBox(
@@ -138,7 +149,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Visibility(
         visible: xOffset == 0 && yOffset == 0,
         child: Container(
-          color: Colors.white,
+           color: navbar,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
             child: GNav(
@@ -146,7 +157,7 @@ class _HomePageState extends State<HomePage> {
               iconSize: 30.0,
               gap: 8.0,
               textSize: 18.0,
-              backgroundColor: Colors.white,
+              // backgroundColor: Color.fromARGB(255, 199, 77, 77),
               tabBackgroundColor: _bgColors[_selectedIndex],
               activeColor: Colors.white,
               padding: EdgeInsets.all(16.0),

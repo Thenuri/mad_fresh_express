@@ -29,17 +29,19 @@ class _chatPageState extends State<chatPage> {
   ];
   @override
   Widget build(BuildContext context) {
+        Color topic = Theme.of(context).brightness == Brightness.dark ? HexColor("#0EC42B") : HexColor("#4D4B4B");
+     Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#333333") : Colors.white;
     return Scaffold(
       body: Column(
         children: [
           Padding(
             padding:EdgeInsets.only(left:150.0,right:20.0,top:93.0,bottom:100.0),
-            child: Text('Chat',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color:HexColor("#4D4B4B"))),
+            child: Text('Chat',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: topic)),
           ),  
         ],
       ),
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: navbar,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
           child: GNav(
@@ -47,7 +49,7 @@ class _chatPageState extends State<chatPage> {
             iconSize: 30.0,
             gap: 8.0,
             textSize: 18.0,
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.white,
             tabBackgroundColor: _bgColors[_selectedIndex],
             activeColor: Colors.white,
             padding: EdgeInsets.all(16.0),

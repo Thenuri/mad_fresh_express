@@ -1,10 +1,15 @@
 import 'package:feshexpress/pages/preview.dart';
 import 'package:feshexpress/pages/thankyou.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../components/custom_navigation_bar1.dart';
+import 'cart_page.dart';
+import 'chat_page.dart';
+import 'favorite_page.dart';
+import 'home_page.dart';
 
 
 class Payment extends StatefulWidget {
@@ -23,6 +28,9 @@ class _PaymentState extends State<Payment> {
   }
   @override
   Widget build(BuildContext context) {
+     Color topic = Theme.of(context).brightness == Brightness.dark ? HexColor("#0EC42B") : HexColor("#4D4B4B");
+         Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#333333") : Colors.white;
+                      Color subtext= Theme.of(context).brightness == Brightness.dark ? HexColor("#FFFFFF") : HexColor("#848484");
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -42,7 +50,7 @@ class _PaymentState extends State<Payment> {
                     ),
                     child: Icon(
                       Icons.arrow_back_ios_rounded,
-                      color: HexColor("#4D4B4B"),
+                      color: topic,
                     ),
                   ),
                   SizedBox(width: 10.0),
@@ -53,7 +61,7 @@ class _PaymentState extends State<Payment> {
                       style: TextStyle(
                         fontSize:24.0,
                         fontWeight: FontWeight.bold,
-                        color: HexColor("#4D4B4B"),
+                        color:  topic,
                       ),
                     ),
                   ),
@@ -69,7 +77,7 @@ class _PaymentState extends State<Payment> {
                       style: TextStyle(
                         fontSize:30.0,
                         fontWeight: FontWeight.bold,
-                        color: HexColor("#4D4B4B"),
+                        color:  topic,
                       ),
                     ),
             ),
@@ -109,6 +117,7 @@ class _PaymentState extends State<Payment> {
               width: 275.0,
               height: 50.0,
               decoration: BoxDecoration(
+                color: navbar,
                 borderRadius: BorderRadius.circular(5.0),
                 border: Border.all(color: HexColor("#848484")),
               ),
@@ -118,7 +127,7 @@ class _PaymentState extends State<Payment> {
                   hintText: 'Name On Card',
                   hintStyle: TextStyle(
                     fontSize: 15.0,
-                    color: HexColor("#848484"),
+                    color: subtext,
                   ),
                 ),
               ),
@@ -128,6 +137,7 @@ class _PaymentState extends State<Payment> {
               width: 275.0,
               height: 50.0,
               decoration: BoxDecoration(
+                color: navbar,
                 borderRadius: BorderRadius.circular(5.0),
                 border: Border.all(color: HexColor("#848484")),
               ),
@@ -137,7 +147,7 @@ class _PaymentState extends State<Payment> {
                   hintText: 'Card Number',
                   hintStyle: TextStyle(
                     fontSize: 15.0,
-                    color: HexColor("#848484"),
+                    color: subtext,
                   ),
                 ),
               ),
@@ -151,6 +161,7 @@ class _PaymentState extends State<Payment> {
                     width: 100.0,
                     height: 50.0,
                     decoration: BoxDecoration(
+                      color: navbar,
                       borderRadius: BorderRadius.circular(5.0),
                       border: Border.all(color: HexColor("#848484")),
                     ),
@@ -160,7 +171,7 @@ class _PaymentState extends State<Payment> {
                         hintText: 'Expiry',
                         hintStyle: TextStyle(
                         fontSize: 15.0,
-                          color: HexColor("#848484"),
+                          color: subtext,
                         ),
                       ),
                     ),
@@ -170,6 +181,7 @@ class _PaymentState extends State<Payment> {
                     width: 100.0,
                     height: 50.0,
                     decoration: BoxDecoration(
+                      color: navbar,
                       borderRadius: BorderRadius.circular(5.0),
                       border: Border.all(color: HexColor("#848484")),
                     ),
@@ -179,7 +191,7 @@ class _PaymentState extends State<Payment> {
                         hintText: 'CVV',
                         hintStyle: TextStyle(
                         fontSize: 15.0,
-                          color: HexColor("#848484"),
+                          color: subtext,
                         ),
                       ),
                     ),
@@ -232,10 +244,83 @@ class _PaymentState extends State<Payment> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomNavigationBarnew(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-        // Add your bottom navigation bar configuration here
+     bottomNavigationBar: Container(
+        color:navbar,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          child: GNav(
+            // selectedIndex: _selectedIndex,
+            iconSize: 30.0,
+            gap: 8.0,
+            textSize: 18.0,
+            // backgroundColor: Colors.white,
+            // tabBackgroundColor: _bgColors[_selectedIndex],
+            // activeColor: Colors.white,
+            padding: EdgeInsets.all(16.0),
+            tabs: [
+              GButton(
+                icon: Icons.home_outlined,
+               
+                iconColor: HexColor("#15CE1F"),
+                iconActiveColor: HexColor("#15CE1F"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 0;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+              ),
+              GButton(
+                icon: Icons.shopping_cart_outlined,
+               
+                iconColor: HexColor("#13B662"),
+                 iconActiveColor: HexColor("#13B662"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => cartPage()),
+                  );
+                },
+              ),
+              GButton(
+                icon: Icons.chat_bubble_outline_rounded,
+                
+                iconColor: HexColor("#119DA4"),
+                iconActiveColor: HexColor("#119DA4"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 2;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => chatPage()),
+                  );
+                },
+              ),
+              GButton(
+                icon: Icons.favorite_outline,
+                
+                iconColor: HexColor("#19647E"),
+                iconActiveColor: HexColor("#19647E"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 3;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => favPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
 
       

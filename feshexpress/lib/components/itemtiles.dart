@@ -4,7 +4,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../pages/Item_page.dart';
 
 class ItemTiles extends StatefulWidget {
@@ -66,7 +65,7 @@ class _ItemTilesState extends State<ItemTiles> {
                   height: 57.0,
                 ),
                 Text(
-                  widget.title,
+                 widget.title ,
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
@@ -74,7 +73,7 @@ class _ItemTilesState extends State<ItemTiles> {
                   ),
                 ),
                 Text(
-                  widget.price,
+                  '100g-Rs.${widget.price}',
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,

@@ -15,6 +15,9 @@ class thankyouPage extends StatefulWidget {
 class _thankyouPageState extends State<thankyouPage> {
   @override
   Widget build(BuildContext context) {
+      Color topic = Theme.of(context).brightness == Brightness.dark ? HexColor("#0EC42B") : HexColor("#4D4B4B");
+         Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#333333") : Colors.white;
+                      Color subtext= Theme.of(context).brightness == Brightness.dark ? HexColor("#FFFFFF") : HexColor("#848484");
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -34,7 +37,7 @@ class _thankyouPageState extends State<thankyouPage> {
                     ),
                     child: Icon(
                       Icons.arrow_back_ios_rounded,
-                      color: HexColor("#4D4B4B"),
+                      color: topic ,
                     ),
                   ),
                   SizedBox(width: 10.0),
@@ -45,7 +48,7 @@ class _thankyouPageState extends State<thankyouPage> {
                       style: TextStyle(
                         fontSize:24.0,
                         fontWeight: FontWeight.bold,
-                        color: HexColor("#4D4B4B"),
+                        color: topic ,
                       ),
                     ),
                   ),  
@@ -59,7 +62,7 @@ class _thankyouPageState extends State<thankyouPage> {
                     'Your Order has been placed!',
                   style: TextStyle(
                   fontSize:15.0,
-                  color: HexColor("#0000"),
+                  
                 ),
               ),
             ),
