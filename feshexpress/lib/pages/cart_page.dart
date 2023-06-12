@@ -414,6 +414,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../components/carttiles.dart';
 import '../model/cart_model.dart';
@@ -427,6 +428,7 @@ class cartPage extends StatefulWidget {
   @override
   State<cartPage> createState() => _cartPageState();
 }
+final formatter = NumberFormat.currency(decimalDigits: 2, symbol: '');
 
 class _cartPageState extends State<cartPage> {
   int _selectedIndex = 1;
@@ -449,10 +451,11 @@ class _cartPageState extends State<cartPage> {
   }
 
  
-
+   
 
   @override
   Widget build(BuildContext context) {
+
      Color TextColor = Theme.of(context).brightness == Brightness.dark ? Colors.white : HexColor("#575353");
     Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#3B3B3B") : Colors.white;
     Color topic = Theme.of(context).brightness == Brightness.dark ? HexColor("#0EC42B") : HexColor("#575353");
@@ -461,7 +464,7 @@ class _cartPageState extends State<cartPage> {
       body:  Column(
           children: [
             Padding(
-              padding:EdgeInsets.only(left:25.0,right:20.0,top:93.0),
+              padding:EdgeInsets.only(left:25.0,right:20.0,top: MediaQuery.of(context).orientation == Orientation.portrait ? 93.0 :10,),
               child: Text('My Cart',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color:topic)),
             ),
             Expanded(
@@ -469,7 +472,7 @@ class _cartPageState extends State<cartPage> {
                 builder: (context, cartProvider, child) {
                   return ListView.builder(
                     itemCount: cartProvider.cartList.length,
-                    padding: EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(MediaQuery.of(context).orientation == Orientation.portrait ? 20 :10,),
 
                     itemBuilder: (context, index) {
                       var x = cartProvider.cartList[index];
@@ -495,7 +498,11 @@ class _cartPageState extends State<cartPage> {
               ),
             ),
             SizedBox(height: 10.0,),
-            Column(
+            Flex(
+              direction: MediaQuery.of(context).orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
+              children: [
+                // total calc display
+              Column(
               children: [
                 // ...existing code...
                 Padding(
@@ -568,7 +575,8 @@ class _cartPageState extends State<cartPage> {
                             ),
 
                           Text(
-                            '50.00',
+                            // '50.00',
+                            formatter.format(50),
                             style: TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -603,7 +611,8 @@ class _cartPageState extends State<cartPage> {
                             ),
                           ),
                           Text(
-                            cartProvider.calculateTotalPrice()!=0.00?(cartProvider.calculateTotalPrice()+50.0).toString():'0.00',
+                            // cartProvider.calculateTotalPrice()!=0.00?(cartProvider.calculateTotalPrice()+50.0).toString():'0.00',
+                            formatter.format(cartProvider.calculateTotalPrice()+50.0),
                             style: TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -615,10 +624,15 @@ class _cartPageState extends State<cartPage> {
                     ],
                   ),
                 ),
+                
               ],
             ),
-            const SizedBox(height: 25.0),
-            GestureDetector(
+              
+
+                // btn
+                Column(
+                  children: [
+                    GestureDetector(
               onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(
                   builder: (context){
                     return const  Address();
@@ -626,7 +640,7 @@ class _cartPageState extends State<cartPage> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(bottom:25.0),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).orientation == Orientation.portrait ? 25 :5,),
                 child: Container(
                     width: 275.0,
                     height: 50.0,
@@ -658,6 +672,15 @@ class _cartPageState extends State<cartPage> {
                 ),
               ),
             ),
+                  ],
+                ),
+              
+              ],
+            ),
+
+
+            // SizedBox(height: MediaQuery.of(context).orientation == Orientation.portrait ? 25 :5,),
+
           ],
         ),
 

@@ -63,9 +63,13 @@ class CartItemModel {
 class CartModel extends ChangeNotifier {
    static const String kCartKey = 'cart';
   List<CartItemModel> cartList = [];
-
+  
   List<CartItemModel> get getCartList {
     return cartList;
+  }
+
+  CartModel() {
+    loadCart();
   }
 
    Future<void> saveCart() async {

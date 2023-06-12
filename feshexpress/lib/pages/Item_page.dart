@@ -436,8 +436,10 @@ class _ItemPageState extends State<ItemPage> {
             return GridView.builder(
               itemCount: value.items.length,
               padding: EdgeInsets.all(20.0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait
+                          ? 2
+                          : 4,
                 childAspectRatio: 138/198,
               ),
               itemBuilder: (context, index) {

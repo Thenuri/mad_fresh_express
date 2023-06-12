@@ -362,8 +362,10 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color:TextColor,),
                   ),
                 ),
-                const SizedBox(
-                  height: 54.0,
+                SizedBox(
+                  height: MediaQuery.of(context).orientation == Orientation.portrait
+                          ? 54
+                          : 5,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 37.0),
@@ -381,8 +383,10 @@ class _HomePageState extends State<HomePage> {
                       return GridView.builder(
                         itemCount: value.catogaries.length,
                         padding: const EdgeInsets.all(12.0),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait
+                          ? 2
+                          : 4,
                           childAspectRatio: 4 / 5,
                         ),
                         itemBuilder: (context, index) {

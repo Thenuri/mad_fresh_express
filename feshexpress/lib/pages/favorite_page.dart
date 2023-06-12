@@ -288,8 +288,10 @@ class _favPageState extends State<favPage> {
                   return GridView.builder(
                     itemCount: value.favouriteList.length,
                     padding: EdgeInsets.all(20.0),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait
+                          ? 2
+                          : 4,
                       childAspectRatio: 138/198,
                     ),
                     itemBuilder: (context, index) {
