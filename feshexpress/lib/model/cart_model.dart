@@ -19,8 +19,12 @@
    
 // }
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartItemModel {
   String name;
@@ -37,11 +41,18 @@ class CartItemModel {
   }) : totalPrice = double.parse(price) * int.parse(quantity);
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) => CartItemModel(
-    name: json['msg'],
+    name: json['name'],
     image: json['image'],
     price: json['price'],
     quantity: json['quantity'],
   );
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'image': image,
+    'price': price,
+    'quantity': quantity,
+  };
 
   @override
   String toString() {
@@ -50,11 +61,39 @@ class CartItemModel {
 }
 
 class CartModel extends ChangeNotifier {
+   static const String kCartKey = 'cart';
   List<CartItemModel> cartList = [];
 
   List<CartItemModel> get getCartList {
     return cartList;
   }
+
+   Future<void> saveCart() async {
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> cartItems = cartList.map((item) => json.encode(item.toJson())).toList();
+    await prefs.setStringList(kCartKey, cartItems);
+    print('Cart saved: $cartItems');
+  } catch (error) {
+    // Handle error while saving cart
+    print('Error saving cart: $error');
+  }
+}
+
+Future<void> loadCart() async {
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? cartItems = prefs.getStringList(kCartKey);
+    print('Loaded cart: $cartItems');
+    if (cartItems != null) {
+      cartList = cartItems.map((item) => CartItemModel.fromJson(json.decode(item))).toList();
+    }
+  } catch (error) {
+    print('Error loading cart: $error');
+  }
+  notifyListeners();
+}
+
 
   void addCartItems({
     required String name,
@@ -69,6 +108,7 @@ class CartModel extends ChangeNotifier {
       quantity: quantity,
     ));
     notifyListeners();
+    saveCart();
   }
 
   double calculateTotalPrice() {
@@ -84,7 +124,19 @@ class CartModel extends ChangeNotifier {
     cartList.removeAt(index);
 
     notifyListeners();
-    
+    saveCart();
     
   }
+
+   void updateQuantity(int index, int quantity) {
+    if (index >= 0 && index < cartList.length) {
+      cartList[index].quantity = quantity.toString();
+      cartList[index].totalPrice =
+          double.parse(cartList[index].price) * quantity;
+      notifyListeners();
+       saveCart();
+    }
+  }
+
+
 }

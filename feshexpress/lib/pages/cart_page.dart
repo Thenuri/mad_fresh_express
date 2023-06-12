@@ -448,12 +448,15 @@ class _cartPageState extends State<cartPage> {
     setState(() {});
   }
 
+ 
+
+
   @override
   Widget build(BuildContext context) {
      Color TextColor = Theme.of(context).brightness == Brightness.dark ? Colors.white : HexColor("#575353");
     Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#3B3B3B") : Colors.white;
     Color topic = Theme.of(context).brightness == Brightness.dark ? HexColor("#0EC42B") : HexColor("#575353");
-     final cartProvider = Provider.of<CartModel>(context,listen: false);
+     final cartProvider = Provider.of<CartModel>(context);
     return Scaffold(
       body:  Column(
           children: [
@@ -480,6 +483,9 @@ class _cartPageState extends State<cartPage> {
                           count: int.parse(x.quantity),
                           total: x.totalPrice.toString(),
                            onDelete: () => removeItem(index),
+                           onCounterChanged:(count){
+                            cartProvider.updateQuantity(index, count);
+                           },
                           // onCategorySelected: (String ) {  },
                         ),
                       );

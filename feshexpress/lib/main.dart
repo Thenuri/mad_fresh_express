@@ -96,6 +96,8 @@ import 'pages/intro_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final cartModel=CartModel();
+  await cartModel.loadCart();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.landscapeLeft,

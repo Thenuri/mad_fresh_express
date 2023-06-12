@@ -140,6 +140,7 @@ class CartTiles extends StatefulWidget {
   final String total;
   final int count;
   final VoidCallback onDelete;
+  final Function (int count)onCounterChanged;
   
   const CartTiles({
     Key? key,
@@ -149,6 +150,7 @@ class CartTiles extends StatefulWidget {
     required this.count,
     required this.total,
     required this.onDelete,
+     required this.onCounterChanged,
   }) : super(key: key);
 
   @override
@@ -166,6 +168,7 @@ class _CartTilesState extends State<CartTiles> {
     setState(() {
       counter++;
     });
+     widget.onCounterChanged(counter);
   }
 
   void decrementCounter() {
@@ -174,6 +177,7 @@ class _CartTilesState extends State<CartTiles> {
         counter--;
       }
     });
+     widget.onCounterChanged(counter);
   }
 
   void toggleFavorite() {
