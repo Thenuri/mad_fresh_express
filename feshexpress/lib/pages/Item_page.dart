@@ -409,23 +409,22 @@ class _ItemPageState extends State<ItemPage> {
                     width: 1.0,
                   ),
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 20.0),
-                    hintText: 'Search',
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      size: 30.0,
-                      color: Colors.white,
-                    ),
-                    suffixIcon: IconButton(
-                      icon: const Icon(
-                        Icons.search,
-                        size: 30.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(left:30.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 20.0),
+                      hintText: 'Search',
+                      
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.search,
+                          size: 30.0,
+                        ),
+                        onPressed: () {},
                       ),
-                      onPressed: () {},
+                      border: InputBorder.none,
                     ),
-                    border: InputBorder.none,
                   ),
                 ),
               ),

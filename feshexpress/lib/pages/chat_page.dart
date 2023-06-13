@@ -35,9 +35,36 @@ class _chatPageState extends State<chatPage> {
       body: Column(
         children: [
           Padding(
-            padding:EdgeInsets.only(left:150.0,right:20.0,top:93.0,bottom:100.0),
+            padding:EdgeInsets.only(left:25.0,right:20.0,top:93.0,bottom:100.0),
             child: Text('Chat',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: topic)),
-          ),  
+          ),
+          SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.only(top: 500.0,left: 5.0),
+                child: Container(
+                  height: 60.0,
+                  width: 400.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(
+                      color: HexColor("#0EC42B"), // Set the border color here
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left:40.0,top:30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(vertical: 20.0),
+                        hintText: 'Type your message here...',
+                        
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ),
         ],
       ),
       bottomNavigationBar: Container(

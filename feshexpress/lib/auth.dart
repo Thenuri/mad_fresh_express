@@ -142,13 +142,20 @@ class AuthProvider extends ChangeNotifier {
     return prefs.getString('apiToken');
   }
 
-  Future<void> logout() async {
+  Future<bool> logout() async {
+  try {
     _isAuthenticated = false;
     notifyListeners();
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+    return true;
+  } catch (e) {
+    print('Error during logout: $e');
+    return false;
   }
+}
+
 
   Future<String?> getUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

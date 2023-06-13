@@ -204,13 +204,16 @@ class _ItemTilesState extends State<ItemTiles> {
   }
   @override
   Widget build(BuildContext context) {
+    Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#333333") : Colors.white;
     var cartModel = Provider.of<CartModel>(context, listen: false);
     var favouriteModel = Provider.of<FavouriteModel>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
+        
         padding: EdgeInsets.all(17.0),
         decoration: BoxDecoration(
+          color:navbar ,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: HexColor("#848484"), // Set the border color here
@@ -239,7 +242,7 @@ class _ItemTilesState extends State<ItemTiles> {
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
-                      color: HexColor("#000000"),
+                      
                     ),
                   ),
                 ),
@@ -250,7 +253,7 @@ class _ItemTilesState extends State<ItemTiles> {
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
-                      color: HexColor("#000000"),
+                     
                     ),
                   ),
                 ),
@@ -277,7 +280,10 @@ class _ItemTilesState extends State<ItemTiles> {
                         // Adjust the spacing here
                         Text(
                           '$counter',
-                          style: TextStyle(fontSize: 15.0),
+                          style: TextStyle(fontSize: 15.0,
+                          color: Colors.black,
+                          ),
+                           
                           // Adjust the font size of the counter value
                         ),
                         // Adjust the spacing here
@@ -330,24 +336,34 @@ class _ItemTilesState extends State<ItemTiles> {
                 ),
               ],
             ),
-            Positioned(
-              top: -15.0,
-              left: -14.0,
-              child: IconButton(
-                icon: Icon(
-                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorite ? const Color(0xFF710005) :  const Color(0xFF710005),
-                ),
-                onPressed: (){
-                  toggleFavorite();
-                  if(isFavorite){
-                    favouriteModel.addFavouritesItems(name: widget.title, image: widget.image, price: widget.price);
-                    setState(() {});
+           Positioned(
+  top: -15.0,
+  left: -14.0,
+  child: IconButton(
+    icon: Icon(
+      isFavorite ? Icons.favorite : Icons.favorite_border,
+      color: isFavorite
+          ? Theme.of(context).brightness == Brightness.dark
+              ? Color.fromARGB(255, 234, 61, 61)
+              : const Color(0xFF710005)
+          : Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : const Color(0xFF710005),
+    ),
+    onPressed: () {
+      toggleFavorite();
+      if (isFavorite) {
+        favouriteModel.addFavouritesItems(
+          name: widget.title,
+          image: widget.image,
+          price: widget.price,
+        );
+        setState(() {});
+      }
+    },
+  ),
+),
 
-                  }
-                },
-              ),
-            ),
           ],
         ),
       ),

@@ -630,49 +630,54 @@ class _cartPageState extends State<cartPage> {
               
 
                 // btn
-                Column(
-                  children: [
-                    GestureDetector(
-              onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context){
-                    return const  Address();
-                  },
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).orientation == Orientation.portrait ? 25 :5,),
-                child: Container(
-                    width: 275.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                      color: HexColor("#0EC42B"),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Address",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 17.0,
-                            fontFamily: 'Roboto',
-                            color: HexColor("#FFFFFF"),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      SizedBox(width:120.0), // Add a space of 5.0 between the text and the icon
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: HexColor("#FFFFFF"),
-                        size:25.0,
+                Padding(
+                  padding: MediaQuery.of(context).orientation == Orientation.portrait
+                    ? const EdgeInsets.only(left:0.0, )
+                      : const EdgeInsets.only(left:250.0),
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                              onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (context){
+                      return const  Address();
+                    },
+                  ),
+                              ),
+                              child: Padding(
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).orientation == Orientation.portrait ? 25 :5,),
+                  child: Container(
+                      width: 275.0,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        color: HexColor("#0EC42B"),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Address",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              fontFamily: 'Roboto',
+                              color: HexColor("#FFFFFF"),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        SizedBox(width:120.0), // Add a space of 5.0 between the text and the icon
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: HexColor("#FFFFFF"),
+                          size:25.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                              ),
+                            ),
                     ],
                   ),
-                ),
-              ),
-            ),
-                  ],
                 ),
               
               ],

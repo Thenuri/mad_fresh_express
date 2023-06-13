@@ -196,7 +196,7 @@ class _CartTilesState extends State<CartTiles> {
 
   @override
   Widget build(BuildContext context) {
-    
+     Color navbar = Theme.of(context).brightness == Brightness.dark ? HexColor("#333333") : Colors.white;
     double totalValue = double.parse(widget.price) * counter;
     return Padding(
       padding: const EdgeInsets.only(top: 30.0, left: 35.0),
@@ -206,6 +206,7 @@ class _CartTilesState extends State<CartTiles> {
             width: 300,
             height: 120,
             decoration: BoxDecoration(
+              color: navbar,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: HexColor("#848484"),
@@ -301,7 +302,7 @@ class _CartTilesState extends State<CartTiles> {
           ),
           Positioned(
             top: 1.0,
-            right: 30,
+            right: MediaQuery.of(context).orientation == Orientation.portrait ? 30 :500,
             child: IconButton(
               icon: Icon(
                 Icons.close,

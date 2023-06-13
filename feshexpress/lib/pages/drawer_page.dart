@@ -28,7 +28,9 @@ class _DrawerPageState extends State<DrawerPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 340.0),
+                  padding: MediaQuery.of(context).orientation == Orientation.portrait
+                    ? const EdgeInsets.only(right:340.0, )
+                      : const EdgeInsets.only(right:790.0),
                   child: IconButton(
                     icon: Icon(
                       Icons.close,
@@ -87,9 +89,13 @@ class _DrawerPageState extends State<DrawerPage> {
             // Image
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(left: 240.0, bottom: 190.0),
+                padding:MediaQuery.of(context).orientation == Orientation.portrait
+                    ? const EdgeInsets.only(left: 240.0, bottom: 190.0)
+                      : const EdgeInsets.only(left: 450.0),
                 child: FractionallySizedBox(
-                  heightFactor: 5, // Adjust the height factor as needed (between 0.0 and 1.0)
+                  heightFactor: MediaQuery.of(context).orientation == Orientation.portrait
+                    ?5
+                    :20, // Adjust the height factor as needed (between 0.0 and 1.0)
                   child: Image.asset(
                     'lib/images/Rectangle 71.png',
                     fit: BoxFit.contain,

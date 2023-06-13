@@ -278,9 +278,9 @@ class _HomePageState extends State<HomePage> {
   void toggleMenu() {
     setState(() {
       if (xOffset == 0 && yOffset == 0) {
-        xOffset = 280;
-        yOffset = 270;
-        scaleFactor = 0.6;
+        xOffset = MediaQuery.of(context).orientation == Orientation.portrait ? 280 :630;
+        yOffset = MediaQuery.of(context).orientation == Orientation.portrait ? 270 :50;
+        scaleFactor =MediaQuery.of(context).orientation == Orientation.portrait ? 0.6:1;
       } else {
         xOffset = 0;
         yOffset = 0;
