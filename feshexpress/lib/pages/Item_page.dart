@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-
-
 import '../components/custom_navigation_bar1.dart';
 import '../components/itemtiles.dart';
 import '../model/categoary_model.dart';
