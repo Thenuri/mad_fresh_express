@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/custom_navigation_bar1.dart';
 import 'cart_page.dart';
@@ -91,200 +92,263 @@ void _getLocation() async {
         child:OrientationBuilder(
           builder: (context, orientation) {
             if(orientation == Orientation.landscape){
-              return Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 24.0, bottom:30.0),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.arrow_back_ios_rounded, color: topic),
-                                  onPressed: () {
-                                    Navigator.pop(context); // Go back when the icon is tapped
-                                  },
-                                ),
-                              ],
+              return SingleChildScrollView(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        physics: NeverScrollableScrollPhysics(),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom:50.0),
+                              child: GestureDetector(
+                                                onTap: () => Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return const cartPage();
+                                                    },
+                                                  ),
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_back_ios_rounded,
+                                                  color: topic,
+                                                ),
+                                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left:50.0),
-                            child: Form(
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                       Padding(
-                                         padding: const EdgeInsets.only(right:100.0),
-                                         child: Text(
-                                          'Delivery',
-                                          style: TextStyle(fontSize: 17.0,),
-                                                                             ),
-                                       ),
-                                    Container(
-                                      width: 300.0,
-                                      height: 50.0,
-                                      decoration: BoxDecoration(
-                                        color: navbar,
-                                        borderRadius: BorderRadius.circular(5.0),
-                                        border: Border.all(color: HexColor("#848484")),
-                                      ),
-                                      child: TextField(
-                                        controller: _addressController, // Bind the controller
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(left: 10.0, top: -6.0),
-                                          hintText: 'Address',
-                                          hintStyle: TextStyle(
-                                            fontSize: 15.0,
-                                            color: subtext,
+                            Padding(
+                              padding: const EdgeInsets.only(left:50.0,bottom: 20.0),
+                              child: Form(
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                         Padding(
+                                           padding: const EdgeInsets.only(right:100.0),
+                                           child: Text(
+                                            'Delivery',
+                                            style: TextStyle(fontSize: 17.0,),
+                                                                               ),
+                                         ),
+                                      Container(
+                                        width: 300.0,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: navbar,
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          border: Border.all(color: HexColor("#848484")),
+                                        ),
+                                        child: TextField(
+                                          controller: _addressController, // Bind the controller
+                                          decoration: InputDecoration(
+                                            contentPadding: const EdgeInsets.only(left: 10.0, top: -6.0),
+                                            hintText: 'Address',
+                                            hintStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              color: subtext,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(height: 20.0),
-                                    Container(
-                                      width: 300.0,
-                                      height: 50.0,
-                                      decoration: BoxDecoration(
-                                        color: navbar,
-                                        borderRadius: BorderRadius.circular(5.0),
-                                        border: Border.all(color: HexColor("#848484")),
-                                      ),
-                                      child: TextField(
-                                        controller: _cityController, // Bind the controller
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(left: 10.0, top: -6.0),
-                                          hintText: 'City',
-                                          hintStyle: TextStyle(
-                                            fontSize: 15.0,
-                                            color: subtext,
+                                      SizedBox(height: 20.0),
+                                      Container(
+                                        width: 300.0,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: navbar,
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          border: Border.all(color: HexColor("#848484")),
+                                        ),
+                                        child: TextField(
+                                          controller: _cityController, // Bind the controller
+                                          decoration: InputDecoration(
+                                            contentPadding: const EdgeInsets.only(left: 10.0, top: -6.0),
+                                            hintText: 'City',
+                                            hintStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              color: subtext,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(height: 20.0),
-                                    Container(
-                                      width: 300.0,
-                                      height: 50.0,
-                                      decoration: BoxDecoration(
-                                        color: navbar,
-                                        borderRadius: BorderRadius.circular(5.0),
-                                        border: Border.all(color: HexColor("#848484")),
-                                      ),
-                                      child: TextField(
-                                        controller: _zipCodeController, // Bind the controller
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(left: 10.0, top: -6.0),
-                                          hintText: 'Zip Code',
-                                          hintStyle: TextStyle(
-                                            fontSize: 15.0,
-                                            color: subtext,
+                                      SizedBox(height: 20.0),
+                                      Container(
+                                        width: 300.0,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: navbar,
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          border: Border.all(color: HexColor("#848484")),
+                                        ),
+                                        child: TextField(
+                                          controller: _zipCodeController, // Bind the controller
+                                          decoration: InputDecoration(
+                                            contentPadding: const EdgeInsets.only(left: 10.0, top: -6.0),
+                                            hintText: 'Zip Code',
+                                            hintStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              color: subtext,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ]
+                                    ]
+                                  )
                                 )
-                              )
-                            ),
-                          )
-                        ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex:2,
-                    child:Column(
-                      children: [
-                        Padding(
-                    padding: const EdgeInsets.only(right:250.0,top:40.0,bottom:20.0),
-                    child: Text(
-                      'Address',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: topic,
-                      ),
-                    ),
-                    ),
-                    Padding(
-                    padding: const EdgeInsets.only(right:250.0,top:80.0),
-                    child: Text(
-                        'Or',
-                        style: TextStyle(fontSize: 15.0,),
-                      ),
-                    ),Padding(
-                    padding: const EdgeInsets.only(left:180.0, bottom:80.0), 
-                    child: Column(
+                    Expanded(
+                      flex:2,
+                      child:Column(
                         children: [
-                          Container(
-                            width: 300.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: navbar,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: Border.all(color: HexColor("#848484")),
+                          Padding(
+                      padding: const EdgeInsets.only(right:250.0,top:40.0,bottom:20.0),
+                      child: Text(
+                        'Address',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          color: topic,
+                        ),
+                      ),
+                      ),
+                      Padding(
+                      padding: const EdgeInsets.only(right:250.0,top:80.0),
+                      child: Text(
+                          'Or',
+                          style: TextStyle(fontSize: 15.0,),
+                        ),
+                      ),Padding(
+                      padding: const EdgeInsets.only(left:180.0, bottom:80.0), 
+                      child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom:150.0),
+                              child: Container(
+                                width: 300.0,
+                                height: 50.0,
+                                decoration: BoxDecoration(
+                                  color: navbar,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: Border.all(color: HexColor("#848484")),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                      child: Icon(
+                                        Icons.location_on,
+                                        color: icon,
+                                      ),
+                                    ),
+                                     Expanded(
+                                       child: Text(
+                                          _position != null ? 'Current Location: ' + _position.toString() : 'No data',
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: subtext,
+                                          ),
+                                        ),
+                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                      child: GestureDetector(
+                                        onTap: _getLocation,
+                                        child: Icon(
+                                          Icons.edit,
+                                          color: icon,
+                                        ),
+                                      ),
+                                    ),
+                                    
+                                  ],
+                                ),
+                              ),
                             ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Icon(
-                                    Icons.location_on,
-                                    color: icon,
-                                  ),
+                            Padding(
+                      padding: EdgeInsets.only(left: 50, right: 240.0),
+                      child: Text(
+                        'Delivery Type',
+                        style: TextStyle(fontSize: 17.0,),
+                      ),
+                    ),
+                               Padding(
+                      padding: const EdgeInsets.only(bottom:20.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          _saveAddress(); // Call the function to save address
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const Preview();
+                              },
+                            ),
+                          );
+                        },
+                        
+                        child: Container(
+                          width: 275.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: HexColor("#0EC42B"),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          padding: const EdgeInsets.only(left: 25.0, ),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Preview",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontFamily: 'Roboto',
+                                  color: HexColor("#FFFFFF"),
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                 Text(
-                                    _position != null ? 'Current Location: ' + _position.toString() : 'No data',
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: subtext,
-                                    ),
+                              ),
+                              SizedBox(width: 120.0), // Add a space of 5.0 between the text and the icon
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: HexColor("#FFFFFF"),
+                                size: 25.0,
                                   ),
-                                
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: GestureDetector(
-                                    onTap: _getLocation,
-                                    child: Icon(
-                                      Icons.edit,
-                                      color: icon,
-                                    ),
-                                  ),
-                                ),
-                                
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                          SizedBox(height: 8.0),
-                          // Additional widgets...
+                    ),
+                            SizedBox(height: 8.0),
+                            // Additional widgets...
+                          ],
+                        ),
+                    ),
+                    SizedBox(height: 10.0),
+                      
+                      
+              
+                  
+              
                         ],
-                      ),
-                  ),
-                  SizedBox(height: 10.0),
+                      )
+                    ),
                     
                     
-
-    
-
-                      ],
-                    )
-                  ),
-                  
-                  
-
-                ],
+              
+                  ],
+                ),
               );
             }else{
               return SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 45.0, right: 40.0, top: 93.0),
+              padding: EdgeInsets.only(left: 45.0, right: 40.0, top: 70.0),
               child: Row(
                 children: [
                   GestureDetector(
@@ -467,7 +531,7 @@ void _getLocation() async {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 45.0, bottom: 45.0),
+                          padding: const EdgeInsets.only(left: 45.0, ),
                           child: RadioListTile(
                             activeColor: HexColor("#0EC42B"),
                             title: Text('Normal Delivery'),
@@ -483,48 +547,51 @@ void _getLocation() async {
                       ],
                     ),
                     SizedBox(height: 10.0),
-                    GestureDetector(
-                      onTap: () {
-                        _saveAddress(); // Call the function to save address
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const Preview();
-                            },
+                    Padding(
+                      padding: const EdgeInsets.only(bottom:20.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          _saveAddress(); // Call the function to save address
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const Preview();
+                              },
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 275.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: HexColor("#0EC42B"),
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                        );
-                      },
-                      child: Container(
-                        width: 275.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color: HexColor("#0EC42B"),
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        padding: const EdgeInsets.only(left: 25.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Preview",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 17.0,
-                                fontFamily: 'Roboto',
+                          padding: const EdgeInsets.only(left: 25.0, ),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Preview",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontFamily: 'Roboto',
+                                  color: HexColor("#FFFFFF"),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width: 120.0), // Add a space of 5.0 between the text and the icon
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
                                 color: HexColor("#FFFFFF"),
-                                fontWeight: FontWeight.bold,
+                                size: 25.0,
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(width: 120.0), // Add a space of 5.0 between the text and the icon
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: HexColor("#FFFFFF"),
-                              size: 25.0,
-                                ),
-                              ],
-                            ),
                           ),
-                        ),
+                    ),
                       ],
                     ),
                    ),
@@ -535,26 +602,120 @@ void _getLocation() async {
           }
         },
       ),
-    )
+    ),
+    bottomNavigationBar: Container(
+        color: navbar,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          child: GNav(
+            // selectedIndex: _selectedIndex,
+            iconSize: 30.0,
+            gap: 8.0,
+            textSize: 18.0,
+            // backgroundColor: Colors.white,
+            // tabBackgroundColor: _bgColors[_selectedIndex],
+            // activeColor: Colors.white,
+            padding: EdgeInsets.all(16.0),
+            tabs: [
+              GButton(
+                icon: Icons.home_outlined,
+               
+                iconColor: HexColor("#15CE1F"),
+                iconActiveColor: HexColor("#15CE1F"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 0;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+              ),
+              GButton(
+                icon: Icons.shopping_cart_outlined,
+               
+                iconColor: HexColor("#13B662"),
+                 iconActiveColor: HexColor("#13B662"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => cartPage()),
+                  );
+                },
+              ),
+              GButton(
+                icon: Icons.chat_bubble_outline_rounded,
+                
+                iconColor: HexColor("#119DA4"),
+                iconActiveColor: HexColor("#119DA4"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 2;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => chatPage()),
+                  );
+                },
+              ),
+              GButton(
+                icon: Icons.favorite_outline,
+                
+                iconColor: HexColor("#19647E"),
+                iconActiveColor: HexColor("#19647E"),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 3;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => favPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
   );   
 }
 
-  void _saveAddress() {
-    // Get the address data from the text fields
-    String address = _addressController.text;
-    String city = _cityController.text;
-    String zipCode = _zipCodeController.text;
+ 
 
-    // Save the address to the desired location (e.g., database, local storage, etc.)
-    // Example:
-    // SomeService.saveAddress(address, city, zipCode);
+void _saveAddress() async {
+  // Get the address data from the text fields
+  String address = _addressController.text;
+  String city = _cityController.text;
+  String zipCode = _zipCodeController.text;
 
-    // You can also access the selected delivery type using the "deliveryType" variable
+  // Save the address data to local storage
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('address', address);
+  await prefs.setString('city', city);
+  await prefs.setString('zipCode', zipCode);
 
-    // Print the address data for verification
-    print('Address: $address');
-    print('City: $city');
-    print('Zip Code: $zipCode');
-    print('Delivery Type: $deliveryType');
-  }
+  // You can also access the selected delivery type using the "deliveryType" variable
+
+  // Check if the address details exist in local storage
+  bool hasAddress = prefs.containsKey('address');
+  bool hasCity = prefs.containsKey('city');
+  bool hasZipCode = prefs.containsKey('zipCode');
+
+  // Print the address data for verification
+  print('Address: $address');
+  print('City: $city');
+  print('Zip Code: $zipCode');
+  print('Delivery Type: $deliveryType');
+
+
+  // Print the results
+  print('Address saved: $hasAddress');
+  print('City saved: $hasCity');
+  print('Zip Code saved: $hasZipCode');
+}
+
 }

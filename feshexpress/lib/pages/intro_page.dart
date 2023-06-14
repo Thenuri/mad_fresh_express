@@ -76,10 +76,7 @@ Widget build(BuildContext context) {
                   ],
                 ),
               ),
-
               Spacer(),
-
-    
               GestureDetector(
                 onTap: () => Navigator.pushReplacement(
                   context,
