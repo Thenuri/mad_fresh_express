@@ -32,7 +32,7 @@ class _ItemPageState extends State<ItemPage> {
   @override
   void initState() {
     var itemModel= Provider.of<ItemModel>(context,listen: false);
-     _loadAllPrefs = itemModel.loadItems();
+    //  _loadAllPrefs = itemModel.loadItems();
     super.initState();
   }
   @override
@@ -88,12 +88,12 @@ class _ItemPageState extends State<ItemPage> {
               ),
               itemBuilder: (context, index) {
 
-                var x = value.items[index][0];
-                print(x['image']);
+                var item = value.items[index];
+                // print(x['image']);
                 return ItemTiles(
-                  image: value.items[index][index]['image'],
-                  title: value.items[index][index]['title'],
-                  price: value.items[index][index]['price'],
+                  image: item.image,
+                  title: item.title,
+                  price: item.price.toString(),
                   // onCategorySelected: (String ) {  },
                 );
               },

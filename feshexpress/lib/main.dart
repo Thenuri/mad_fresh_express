@@ -108,8 +108,6 @@ void main() async {
             create: (BuildContext context) => AuthProvider(),
             child: MyApp(),
         )
-    
-    
     );
 }
 class MyApp extends StatelessWidget {
@@ -119,7 +117,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CategoaryModel()),
+        ChangeNotifierProvider(create: (context) => CategoryModel()),
         ChangeNotifierProvider(create: (context) => ItemModel()),
         ChangeNotifierProvider(create: (context) => CartModel(),child:cartPage(),),
         ChangeNotifierProvider(create: (context) => FavouriteModel()),
@@ -144,11 +142,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: const IntroPage(),
          routes: {
-         '/profile': (context) => profile(),
-    '/purchase-history': (context) => purchasehistory(),
-    '/contact-us': (context) => contactus(),
-    '/settings': (context) => settings(),
-    '/promotions': (context) => promotions(),
+          '/profile': (context) => profile(),
+          '/purchase-history': (context) => purchasehistory(),
+          '/contact-us': (context) => contactus(),
+          '/settings': (context) => settings(),
+          '/promotions': (context) => promotions(),
          },
       ),
     );

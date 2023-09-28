@@ -22,7 +22,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+// import 'package:hexcolor/hexcolor.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -75,6 +75,8 @@ class CartModel extends ChangeNotifier {
    Future<void> saveCart() async {
   try {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // todo - change this to send the data to the server. Send with the api token
     List<String> cartItems = cartList.map((item) => json.encode(item.toJson())).toList();
     await prefs.setStringList(kCartKey, cartItems);
     print('Cart saved: $cartItems');
@@ -90,7 +92,10 @@ Future<void> loadCart() async {
     List<String>? cartItems = prefs.getStringList(kCartKey);
     print('Loaded cart: $cartItems');
     if (cartItems != null) {
+      // todo - change this to get the data from the API. send the api token to identify the user
       cartList = cartItems.map((item) => CartItemModel.fromJson(json.decode(item))).toList();
+
+    
     }
   } catch (error) {
     print('Error loading cart: $error');
@@ -105,12 +110,16 @@ Future<void> loadCart() async {
     required String price,
     required String quantity,
   }) {
+
     cartList.add(CartItemModel(
       name: name,
       image: image,
       price: price,
       quantity: quantity,
     ));
+
+     // send the prod id quabbtity  to the server. Send with the api token
+
     notifyListeners();
     saveCart();
   }

@@ -139,10 +139,10 @@ class _HomePageState extends State<HomePage> {
                   height: 10.0,
                 ),
                 Expanded(
-                  child: Consumer<CategoaryModel>(
+                  child: Consumer<CategoryModel >(
                     builder: (context, value, child) {
                       return GridView.builder(
-                        itemCount: value.catogaries.length,
+                        itemCount: value.categories.length,
                         padding: const EdgeInsets.all(12.0),
                         gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait
@@ -157,14 +157,14 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ItemPage(title: value.catogaries[index][1]),
+                                  builder: (context) => ItemPage(title: value.categories[index][1]),
                                 ),
                               );
                             },
                             child: categoryTiles(
-                              image: value.catogaries[index][0],
-                              title: value.catogaries[index][1],
-                              color: value.catogaries[index][2],
+                              image: value.categories[index][0],
+                              title: value.categories[index][1],
+                              color: const Color(0xFF95FF9A),
 
                             ),
                           );

@@ -1,15 +1,15 @@
-import 'dart:math';
+ import 'dart:math';
 
-import 'package:feshexpress/pages/location.dart';
+ import 'package:feshexpress/pages/location.dart';
 import 'package:feshexpress/pages/preview.dart';
-import 'package:feshexpress/pages/signup_page.dart';
+ import 'package:feshexpress/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../components/custom_navigation_bar1.dart';
+ import '../components/custom_navigation_bar1.dart';
 import 'cart_page.dart';
 import 'chat_page.dart';
 import 'favorite_page.dart';

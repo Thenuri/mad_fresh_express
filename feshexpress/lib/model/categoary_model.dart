@@ -3,18 +3,18 @@ import 'package:hexcolor/hexcolor.dart';
 
 
 
-class CategoaryModel extends ChangeNotifier {
+class CategoryModel extends ChangeNotifier {
 
   // List of catogaries 
-  final List _catogaries = [
+  final List _categories = [
     //[image , title, color]
-    ["lib/images/veg.png","Vegetables",const Color(0xFF95FF9A)],
-    ["lib/images/fruits.png","Fruits",const Color(0xFF95FF9A)],
-    ["lib/images/meat.png","Meat",const Color(0xFF95FF9A)],
-    ["lib/images/sea.png","Seafood",const Color(0xFF95FF9A)]
+    ["lib/images/veg.png","Vegetables"],
+    ["lib/images/fruits.png","Fruits"],
+    ["lib/images/meat.png","Meat"],
+    ["lib/images/sea.png","Seafood"]
   ];
 
-  get catogaries => _catogaries;
+  get categories => _categories;
    
 }
 
